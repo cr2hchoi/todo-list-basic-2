@@ -11,29 +11,52 @@
 
 <script setup>
 // 부모로부터 전달받는 목록 데이터를 선언한다.
-
+const props = defineProps({
+  items: {
+  type : Array,
+    default : () => [], //기본값은 빈 배열
+    //화살표 함수를 사용하면 Vue가 컴포넌트를 생성
+  }
+});
 // 부모에게 보낼 이벤트를 선언한다.
+const emit = defineEmits(['toggle-todo','delete-todo']);
 
 // deleteTodo는 삭제할 항목의 id를 부모에게 전달한다.
+const deleteTodo = (id) => {
+  emit('delete-todo',id);
+};
 
 // toggleTodo는 완료 상태를 바꿀 항목의 id를 부모에게 전달한다.
+const toggleTodo = (id) => {
+  emit('toggle-todo',id);
+};
 </script>
 
 <template>
   <section class="todo-list">
-    <div class="todo-empty">
+    <div class="todo-empty"
+      v-if="props.items.length === 0">
+<!--      아이템 리스트가 아무것도 없다면 실행될 내용-->
       <p>할 일이 없습니다.</p>
     </div>
 
-    <div class="todo-item">
+    <div class="todo-item"
+      v-for="item in props.items"
+         key="item.id"
+         :class="{'todo-item--completed':item.completed}"
+      >
+<!--      완료된 항목 클래스는, 완료된 상태를 적용시키겟다-->
       <label class="todo-item-check-wrap">
-        <input type="checkbox" />
+        <input type="checkbox"
+        :checked="item.completed"
+               @change="toggleTodo(item.id)"
+        />
         <span>완료</span>
       </label>
 
       <span class="todo-item-text">{{ item.msg }}</span>
 
-      <button class="todo-delete-btn">삭제</button>
+      <button class="todo-delete-btn" @click="deleteTodo(item.id)">삭제</button>
     </div>
   </section>
 </template>

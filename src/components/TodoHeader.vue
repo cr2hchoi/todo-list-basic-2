@@ -36,13 +36,13 @@ const updateTab = (tab) => {
     <ul class="todo-tab">
       <li
         :class="{ 'todo-tab--active': props.current === 'all' }"
-        @click="update - tab('all')"
+        @click="updateTab('all')"
       >
         전체
       </li>
       <li
-        li:class="{'todo-tab--active': props.current === 'completed'}"
-        @click="update - tab('completed')"
+        :class="{'todo-tab--active': props.current === 'completed'}"
+        @click="updateTab('completed')"
       >
         완료
       </li>

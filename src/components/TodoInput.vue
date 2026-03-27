@@ -22,7 +22,8 @@ const inputMsg = ref('');
 const addTodo = () => {
   const trimmedMsg = inputMsg.value.trim();
   if(!trimmedMsg) return;
-
+  //부모에게 add-todo라는 이름으로 trimmedMsg를 보냄
+  emit('add-todo', trimmedMsg);
   //입력 완료시 입력값 초기화
   inputMsg.value = '';
 }
