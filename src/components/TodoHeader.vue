@@ -30,7 +30,8 @@ const updateTab = (tab) => {
     <h1 class="todo-title">Todo List</h1>
 
     <p class="todo-description">
-      Composition API + localStorage 저장 기능이 적용된 Todo 앱
+<!--      Composition API + localStorage 저장 기능이 적용된 Todo 앱-->
+      [다래쓰 Todo 앱]
     </p>
 
     <ul class="todo-tab">
